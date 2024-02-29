@@ -5,3 +5,11 @@
 .fa:hover {
     cursor: pointer;
 }
+
+.container {
+    margin: 3rem;
+}
+
+.card{
+    height: 35vh;
+}

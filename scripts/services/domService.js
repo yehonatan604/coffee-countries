@@ -1,4 +1,5 @@
 import { countries, reset, search } from "./countriesService.js";
+import { getData, likedCountries, updateData } from "./storageService.js";
 
 const cards = document.getElementById('cards');
 const searchInput = document.getElementById('search');
@@ -17,7 +18,7 @@ const createCard = (country) => {
     card.className = 'card shadow m-2 col-md-3 col-sm-12';
 
     const cardImg = document.createElement('img');
-    cardImg.className = 'card-img-top';
+    cardImg.className = 'card-img-top p-2 mt-2 border rounded shadow';
     cardImg.src = country.flags.png;
 
     const cardBody = document.createElement('div');
@@ -37,6 +38,7 @@ const createCard = (country) => {
     let heart = document.createElement('i');
 
     heart.addEventListener('click', () => {
+        updateData(country.name.common);
         if (heart.classList.contains('text-dark')) {
             heart.className = 'fa fa-heart text-danger';
         } else {
@@ -45,6 +47,11 @@ const createCard = (country) => {
     });
 
     let isLiked = false;
+    getData();
+    if (likedCountries.includes(country.name.common)) {
+        isLiked = true;
+    }
+
     heart.className = `fa fa-heart ${isLiked ? 'text-danger' : 'text-dark'}`;
 
     card.appendChild(cardImg);
