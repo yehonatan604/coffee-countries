@@ -1,3 +1,7 @@
 .card-img-top{
     height: 35%;
 }
+
+.fa:hover {
+    cursor: pointer;
+}
