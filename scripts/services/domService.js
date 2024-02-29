@@ -1,18 +1,15 @@
-import { countries, reset } from "./countriesService.js";
+import { countries, reset, search } from "./countriesService.js";
 
 const cards = document.getElementById('cards');
 const searchInput = document.getElementById('search');
 
 searchInput.addEventListener('keyup', (e) => {
-    console.log(e);
     //reset();
     if (e.target.value) {
         cards.innerHTML = '';
-
+        search(e.target.value);
+        createCardsList();
     }
-
-
-
 });
 
 const createCard = (country) => {
@@ -38,7 +35,6 @@ const createCard = (country) => {
     cardFooter.className = 'card-footer d-flex justify-content-center mb-2';
 
     let heart = document.createElement('i');
-    heart.className = 'fa fa-heart';
 
     heart.addEventListener('click', () => {
         if (heart.classList.contains('text-dark')) {
@@ -47,6 +43,9 @@ const createCard = (country) => {
             heart.className = 'fa fa-heart text-dark';
         }
     });
+
+    let isLiked = false;
+    heart.className = `fa fa-heart ${isLiked ? 'text-danger' : 'text-dark'}`;
 
     card.appendChild(cardImg);
 
